@@ -17,10 +17,14 @@ and
 				     end
 		   else numRects' i j
 
-
-fun searchLimits value = let n = ceiling ((1.0 + (Math.sqrt (Real.fromInt (1 + 8*value))))/2) 
-
-fun search eval (i, j) =  
+fun walkSearch (i, j) eval = let 
+ 			        val current = eval (i, j)
+			        val up = if j - 1 >= 1 then eval (i, (j-1)) else eval (i, j)
+ 			        val left = if i - 1 >= 1 then eval ((i- 1), j) else eval (i, j)
+ 			      in if up < current then
+ 					if left < up then walkSearch (i - 1, j) eval else walkSearch (i, j -1) eval
+ 				else if left < current then walkSearch (i - 1, j) eval else (i, j) 
+ 			      end 
 
 
 fun makeEval target = (fn (i, j) => abs ((numRects i j) - target))
