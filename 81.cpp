@@ -55,12 +55,6 @@ int main(){
     }
 	file.close();
 
-	/*
-	for(int i = 0; i < 80; i++){
-		cout << text[i] << '\n';
-	}
-*/
-
 	//convert to ints
 	int data[80][80];
 	for(int i = 0; i < 80; i++){
